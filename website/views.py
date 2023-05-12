@@ -147,8 +147,12 @@ def delete_product():
 
 @views.route('/new_order')
 def new_order_redir():
-    newest_order = Order.query.order_by(Order.orderID.desc()).first()
-    return redirect(url_for('views.new_order', orderID=newest_order.orderID+1))
+    try:
+        newest_order = Order.query.order_by(Order.orderID.desc()).first()
+        return redirect(url_for('views.new_order', orderID=newest_order.orderID+1))
+    except AttributeError:
+        return redirect(url_for('views.new_order', orderID=1))
+
 
 # add new item to order
 
