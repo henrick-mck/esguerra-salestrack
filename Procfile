@@ -1,1 +1,1 @@
-web: waitress-serve --listen "*:$PORT" app:wsgifunc
+web: gunicorn app:app
