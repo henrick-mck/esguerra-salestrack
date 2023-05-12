@@ -1,0 +1,95 @@
+{% extends "base.html"%} {% block title%}New Order{% endblock%} {% block
+    content %}
+    <div>
+    <form method="POST">
+    </br>
+      <h3 align="left">Order # {{exists.orderID}}</h3>
+    </br>
+
+      <div class="form-group">
+        <label for="productItemID">Product Name</label>
+        
+        <select id="productItemID", name = "productItemID", class="form-control">
+        {% for productItem in productList %}
+        <option value="{{productItem.productID}}" >{{productItem.name}} &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp ${{productItem.price}}</option>
+        {%endfor%}
+        </select>
+      </div>
+    
+      <div class="form-group">
+        <label for="qty">Quantity</label>
+        <input
+          type="number"
+          class="form-control"
+          min="1"
+          step="1"
+          id="qty"
+          name="qty"
+          placeholder="Enter Product Quantity"
+          required="required"
+        />
+      </div>
+    
+        <br />
+        <button type="submit" class="btn btn-primary">Add Item</button>
+      </div>
+    </form>
+  
+    <br />
+    <br />
+  <ul class="list-group list-group-flush" id="product">
+    <div class="table-responsive">
+        <table class="table table-sm">
+          <tr>
+            <th>Order Item</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th>Delete</th>
+          </tr>
+          
+          {% for item in exists.orderItem %}
+          <tr>
+            <td>{{item.product.name }}</td>
+            <td>{{item.qty }}</td>
+            <td>{{item.product.price*item.qty}}</td>
+  
+            <td>
+              <button
+                class="btn btn-danger btn-sm rounded-0"
+                type="button"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Delete"
+                onClick="deleteOrderItem({{ item.orderItemID }}, {{ exists.orderID }})"
+              >
+                <i class="fa fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+          {%endfor%}
+
+          <tr class = "table-primary">
+            <td></td>
+            <td>TOTAL</td>
+            <td>{{exists.totalPrice}}</td>
+          </tr>
+
+        </table>
+
+      <div align="center">
+        <button
+            button
+            class="btn btn-success btn-sm rounded-0"
+            type="button"
+            data-toggle="tooltip"
+            data-placement="top"
+            onclick="window.location.href='{{url_for('views.finish_order', orderID = exists.orderID)}}'"
+          >
+          Finish Order
+        </button>
+      </div>
+
+    </ul>
+  </div>
+    {% endblock %}
+    

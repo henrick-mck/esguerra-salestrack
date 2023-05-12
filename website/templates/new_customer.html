@@ -1,0 +1,56 @@
+{% extends "base.html"%} {% block title%}New Customer{% endblock%} {% block
+content %}
+
+<form method="POST">
+  <h3 align="center">New Customer</h3>
+
+  <div class="form-group">
+    <label for="customerName">Customer Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="customerName"
+      name="customerName"
+      placeholder="Enter Customer Name"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="contactNum">Customer Contact Number</label>
+    <input
+      type="tel"
+      class="form-control"
+      id="contactNum"
+      name="contactNum"
+      placeholder="Enter Customer Contact Number"
+      pattern="[0-9]{10}"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="address">Customer Address</label>
+    <input
+      type="text"
+      class="form-control"
+      id="address"
+      name="address"
+      placeholder="Enter Customer Address"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="email">Customer Email</label>
+    <input
+      type="email"
+      class="form-control"
+      id="email"
+      name="email"
+      placeholder="Enter Customer Email"
+      pattern="^\S+@\S+$"
+    />
+    <br />
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+</form>
+
+{% endblock %}

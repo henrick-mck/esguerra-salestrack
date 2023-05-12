@@ -1,0 +1,54 @@
+
+{% extends "base.html"%} {% block title%}Edit Prodcut{% endblock%} {% block
+    content %}
+    
+    <form action="/edit_product/{{product_to_update.productID}}" method="POST">
+      <h3 align="center">Edit Product</h3>
+    
+      <div class="form-group">
+        <label for="productName">Product Name</label>
+        <input
+          type="text"
+          class="form-control"
+          value="{{product_to_update.name}}"
+          id="productName"
+          name="productName"
+          placeholder="Enter Product Name"
+        />
+      </div>
+    
+      <div class="form-group">
+        <label for="price">Price</label>
+        <input
+          type="number"
+          min="0.01"
+          step="0.01"
+          class="form-control"
+          value="{{product_to_update.price}}"
+          id="price"
+          name="price"
+          placeholder="Enter Product Price"
+        />
+      </div>
+    
+      <div class="form-group">
+        <label for="address">Product Description</label>
+        <input
+          type="text"
+          class="form-control"
+          value="{{product_to_update.description}}"
+          id="description"
+          name="description"
+          placeholder="Enter Product Description"
+        />
+      </div>
+
+      
+        <br />
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+    
+    {% endblock %}
+    
+

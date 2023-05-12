@@ -1,0 +1,112 @@
+{% extends "base.html"%} {% block title%}Sales List{% endblock%} {% block
+    content %}
+</br>
+<h3 align="left">Sales List</h1>
+</br>
+  <ul class="list-group list-group-flush" id="product">
+    <div class="table-responsive">
+      <table class="table table-striped table-sm">
+
+        <tr>
+          <th>ID</th>
+          <th>Order Details</th>
+          <th>Qty</th>
+          <th>Price</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+        {% set total_revenue = namespace(total = 0.0) %}
+        {% for row in sales %}
+        <tr>
+          <td>{{row.orderID }}</td>
+          <td>
+            {%for items in row.orderItem%}
+            {{items.product.name }} <br>
+            {%endfor%}
+            Total
+          </td>
+          <td>
+            {%for items in row.orderItem%}
+            {{items.qty }} <br>
+            {%endfor%}
+          </td>
+          <td>
+            {%for items in row.orderItem%}
+            {{items.product.price*items.qty }} <br>
+            {%endfor%}
+            {{row.totalPrice}} <br>
+            {% set total_revenue.total = total_revenue.total + row.totalPrice%} 
+          </td>
+            <td>
+              <button
+                button
+                class="btn btn-success btn-sm rounded-0"
+                type="button"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Edit"
+                onclick="window.location.href='{{url_for('views.new_order', orderID=row.orderID)}}'"
+              >
+                <i class="fa fa-edit"></i>
+              </button>
+            </td>
+  
+            <td>
+              <button
+                class="btn btn-danger btn-sm rounded-0"
+                type="button"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Delete"
+                onclick="window.location.href='{{url_for('views.delete_order', orderID = row.orderID)}}'"
+              >
+                <i class="fa fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+          {%endfor%}
+  
+      </table>
+    </div>
+  </ul>
+  
+  <br />
+  <div align="left">
+    <button
+      type="newOrder_button"
+      class="btn btn-primary"
+      onClick="window.location.href = 'new_order';"
+    >
+      Add New Order
+    </button>
+  </div>
+
+</br>
+</br>
+  <ul class="list-group list-group-flush" id="product">
+    <div class="table-responsive">
+      <table class="table table-sm table-bordered">
+
+        <tr>
+          <th>Sales Summary</th>
+          <th></th>
+        </tr>
+
+        <tr>
+          <td>Number of Orders</td>
+          <td>
+            {{total_orders}}
+          </td>
+        </tr>
+
+          <tr>
+            <td>Sales Revenue</td>
+            <td>${{total_revenue.total}}</td>
+          </tr>
+  
+      </table>
+    </div>
+  </ul>
+    
+    {% endblock %}
+    
